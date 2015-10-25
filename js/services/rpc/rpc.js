@@ -84,11 +84,11 @@ function(syscall, time, alerts, utils, rootScope, uri, authconf) {
 
       // If some proposed configurations are still in the pipeline then retry
       if (configurations.length) {
-        alerts.log("The last connection attempt was unsuccessful. Trying another configuration");
+        alerts.log("连接失败，请检测配置。");
         timeout = setTimeout(update, 0);
       }
       else {
-        alerts.addAlert('<strong>Oh Snap!</strong> Could not connect to the aria2 RPC server. Will retry in 10 secs. You might want to check the connection settings by going to Settings > Connection Settings', 'error');
+        alerts.addAlert('不能连接Aria2服务器. 将在10秒后重试. 您也可以通过菜单<strong>设置 > 连接设置</strong>检测错误。', 'error');
         timeout = setTimeout(update, 10000);
       }
     };
@@ -113,7 +113,7 @@ function(syscall, time, alerts, utils, rootScope, uri, authconf) {
           if (currentToken)
             alerts.addAlert('Successfully connected to Aria2 through its remote RPC …', 'success');
           else
-            alerts.addAlert('Successfully connected to Aria2 through remote RPC, however the connection is still insecure. For complete security try adding an authorization secret token while starting Aria2 (through the flag --rpc-secret)');
+            alerts.addAlert('成功连接到Aria2通过远程RPC，但是当前连接是不安全的。请尝试使用(--rpc-secret)启动Aria2服务器.');
           configurations = [];
         }
 

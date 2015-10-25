@@ -65,7 +65,6 @@ angular.module('webui.ctrls.props', [
       }
     }
 
-
     utils.mergeMap(arr, scope.properties, function(prop, nprop) {
       nprop = nprop || {};
       nprop.name = prop.name;
@@ -78,6 +77,7 @@ angular.module('webui.ctrls.props', [
         nprop._val = prop.val;
       }
       nprop.desc = prop.desc;
+      nprop.tr = prop.tr;
       return nprop;
     });
   });

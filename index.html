@@ -9,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title ng-bind="$root.pageTitle">Aria2 WebUI</title>
+  <title ng-bind="$root.pageTitle">Aria2 Web管理</title>
 
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -99,44 +99,44 @@
       <ul class="nav navbar-nav">
         <li class="dropdown" dropdown>
           <a class="dropdown-toggle" href="#" dropdown-toggle>
-            Add <span class="caret"></span>
+            添加 <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
             <li>
               <a href="#" ng-click="addUris()">
-                <span class="fa fa-fw fa-arrow-circle-o-down">&nbsp;</span> By URIs
+                <span class="fa fa-fw fa-arrow-circle-o-down">&nbsp;</span> URL地址
               </a>
             </li>
             <li ng-show="isFeatureEnabled('BitTorrent') && enable.torrent">
               <a href="#" ng-click="addTorrents()">
-                <span class="fa fa-fw fa-cloud-download">&nbsp;</span> By Torrents
+                <span class="fa fa-fw fa-cloud-download">&nbsp;</span> BT种子
               </a>
             </li>
             <li ng-show="isFeatureEnabled('Metalink') && enable.metalink">
               <a href="#" ng-click="addMetalinks()">
-                <span class="fa fa-fw fa-file-text-o">&nbsp;</span> By Metalinks
+                <span class="fa fa-fw fa-file-text-o">&nbsp;</span>  Metalinks
               </a>
             </li>
           </ul>
         </li>
 
         <li class="dropdown" dropdown>
-          <a class="dropdown-toggle" href="#" dropdown-toggle> Manage <span class="caret"></span></a>
+          <a class="dropdown-toggle" href="#" dropdown-toggle> 管理 <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li>
               <a
                 href="#"
-                ng-click="forcePauseAll()"><span class="fa fa-fw fa-pause">&nbsp;</span> Pause All</a>
+                ng-click="forcePauseAll()"><span class="fa fa-fw fa-pause">&nbsp;</span> 暂停所有任务</a>
             </li>
             <li>
               <a
                 href="#"
-                ng-click="unpauseAll()"><span class="fa fa-fw fa-play">&nbsp;</span> Resume Paused</a>
+                ng-click="unpauseAll()"><span class="fa fa-fw fa-play">&nbsp;</span>继续所有任务</a>
             </li>
             <li>
               <a
                 href="#"
-                ng-click="purgeDownloadResult()"><span class="fa fa-fw fa-times-circle">&nbsp;</span> Purge Completed</a>
+                ng-click="purgeDownloadResult()"><span class="fa fa-fw fa-times-circle">&nbsp;</span>删除已完成的任务</a>
             </li>
 
             <!-- not adding remove all as requires many rpc syscalls to finish
@@ -155,31 +155,31 @@
         <li class="dropdown" dropdown>
           <a
             href="#"
-            class="dropdown-toggle" dropdown-toggle>Settings <span class="caret"></span></a>
+            class="dropdown-toggle" dropdown-toggle>设置 <span class="caret"></span></a>
 
           <ul class="dropdown-menu">
             <li>
               <a
                 ng-click="changeCSettings()"
-                href="#"><span class="fa fa-fw fa-wrench">&nbsp;</span> Connection Settings</a>
+                href="#"><span class="fa fa-fw fa-wrench">&nbsp;</span> 连接设置</a>
             </li>
 
             <li>
               <a
                 ng-click="changeGSettings()"
-                href="#"><span class="fa fa-fw fa-wrench">&nbsp;</span> Global Settings</a>
+                href="#"><span class="fa fa-fw fa-wrench">&nbsp;</span> 公共设置</a>
             </li>
 
             <li>
               <a
                 ng-click="showServerInfo()"
-                href="#"><span class="fa fa-fw fa-info-circle">&nbsp;</span> Server info</a>
+                href="#"><span class="fa fa-fw fa-info-circle">&nbsp;</span> 服务器信息</a>
             </li>
 
             <li>
               <a
                 ng-click="showAbout()"
-                href="#"><span class="fa fa-fw fa-question-circle">&nbsp;</span> About and contribute</a>
+                href="#"><span class="fa fa-fw fa-question-circle">&nbsp;</span> 关于</a>
             </li>
           </ul>
         </li>
@@ -192,10 +192,10 @@
             href="#">Miscellaneous <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li>
-              <a href="#"><span class="fa fa-fw fa-list-alt">&nbsp;</span> Global Statistics</a>
+              <a href="#"><span class="fa fa-fw fa-list-alt">&nbsp;</span> 公共状态</a>
             </li>
             <li>
-              <a href="#"><span class="fa fa-fw fa-info-circle">&nbsp;</span> About</a>
+              <a href="#"><span class="fa fa-fw fa-info-circle">&nbsp;</span> 关于</a>
             </li>
           </ul>
         </li>
@@ -227,7 +227,7 @@
 
       <!-- {{{ global statistics -->
       <ul class="nav nav-list" ng-if="enable.sidebar.stats">
-        <li class="nav-header" ng-show="totalAria2Downloads()">Global Statistics</li>
+        <li class="nav-header" ng-show="totalAria2Downloads()">公共状态</li>
         <li>
           <div
             yticks="3"
@@ -247,62 +247,62 @@
 
       <!-- {{{ download filters -->
       <ul id="filters" class="clearfix nav nav-list" ng-show="enable.sidebar.filters">
-        <li class="nav-header">Download Filters</li>
+        <li class="nav-header">任务过滤</li>
         <li class="checkbox">
           <label for="filter-speed">
             <input type="checkbox" ng-model="filterSpeed" ng-change="persistFilters()" id="filter-speed">
-            Running
+            运行
           </label>
         </li>
         <li class="active checkbox">
           <label for="filter-active">
             <input type="checkbox" ng-model="filterActive" ng-change="persistFilters()" id="filter-active">
-            Active
+            下载
           </label>
         </li>
         <li class="checkbox">
           <label for="filter-waiting">
             <input type="checkbox" ng-model="filterWaiting" ng-change="persistFilters()" id="filter-waiting">
-            Waiting
+            等待
           </label>
         </li>
         <li class="checkbox">
           <label for="filter-complete">
             <input type="checkbox" ng-model="filterComplete" ng-change="persistFilters()" id="filter-complete">
-            Complete
+            完成
           </label>
         </li>
         <li class="checkbox">
           <label for="filter-error">
             <input type="checkbox" ng-model="filterError" ng-change="persistFilters()" id="filter-error">
-            Error
+            错误
           </label>
         </li>
         <li class="checkbox">
           <label for="filter-paused">
             <input type="checkbox" ng-model="filterPaused" ng-change="persistFilters()" id="filter-paused">
-            Paused
+            暂停
           </label>
         </li>
         <li class="checkbox">
           <label for="filter-removed">
             <input type="checkbox" ng-model="filterRemoved" ng-change="persistFilters()" id="filter-removed">
-            Removed
+            删除
           </label>
         </li>
         <li class="checkbox">
           <label>
             <input type="checkbox" ng-model="hideLinkedMetadata" id="hide-linked-metadata">
-            Hide linked meta-data
+            隐藏链接数据
           </label>
         </li>
         <li>
           <p>
-          Displaying <strong>{{totalDownloads}}</strong> of <em>{{totalAria2Downloads()}}</em> downloads
+          显示 <em>{{totalAria2Downloads()}}</em>中的<strong>{{totalDownloads}}</strong> 个下载
           </p>
           <p>
-            <button ng-click="toggleStateFilters()" class="btn btn-default btn-xs">Toggle</button>
-            <button ng-click="resetFilters()" class="btn btn-default btn-xs">Reset filters</button>
+            <button ng-click="toggleStateFilters()" class="btn btn-default btn-xs">切换</button>
+            <button ng-click="resetFilters()" class="btn btn-default btn-xs">重置</button>
           </p>
         </li>
       </ul>
@@ -313,16 +313,16 @@
 
       <!-- {{{ starred properties -->
       <ul class="clearfix nav nav-list" ng-controller="StarredPropsCtrl" ng-show="properties.length && enable.sidebar.starredProps">
-        <li class="nav-header">Quick Access Settings</li>
+        <li class="nav-header">快速设置</li>
         <li ng-repeat="prop in properties" class="form-group">
-          <label title="{{prop.desc}}" style="width: 100%;">{{prop.name}}</label>
+          <label title="{{prop.desc}}" style="width: 100%;">{{prop.tr}}</label>
           <div class="form-group">
             <select style="width: 100%;" ng-show="prop.options.length" class="form-control" ng-options="opt for opt in prop.options" ng-model="prop.val"></select>
             <input style="width: 100%;" ng-show="!prop.options.length" type="text" class="form-control input-large" ng-model="prop.val"/>
           </div>
         </li>
         <li>
-          <button ng-disabled="!enabled()" ng-click="save()" class="btn btn-default btn-sm">Save settings</button>
+          <button ng-disabled="!enabled()" ng-click="save()" class="btn btn-default btn-sm">保存设置</button>
         </li>
       </ul>
       <!-- }}} -->
@@ -336,7 +336,7 @@
     <!-- {{{ downloads -->
     <!-- Bug?? <div ng-show="!totalAria2Downloads() && totalAria2Downloads() > getDownloads()" class="hero-unit">-->
     <div ng-show="!totalAria2Downloads()" class="jumbotron">
-      Currently no download in line to display, use the '<strong>Add</strong>' download button to start downloading files!
+      当前并没有下砸任务，请使用'<strong>Add</strong>'按钮添加下载任务！
     </div>
 
 
@@ -400,21 +400,21 @@
                 <a
                   ng-click="showSettings(download)"
                   ng-show="['waiting', 'active'].indexOf( getType(download) )!= -1"
-                  href="#"><span class="fa fa-fw fa-cog">&nbsp;</span> Settings</a>
+                  href="#"><span class="fa fa-fw fa-cog">&nbsp;</span> 设置</a>
               </li>
 
               <li ng-show="download.bittorrent && false">
-                <a href="#"><span class="fa fa-fw fa-list-alt">&nbsp;</span> Peers</a>
+                <a href="#"><span class="fa fa-fw fa-list-alt">&nbsp;</span> 资源</a>
               </li>
 
               <li>
                 <a ng-click="toggleCollapsed(download)"
-                   href="#"><span class="fa fa-fw fa-info-circle">&nbsp;</span> More Info</a>
+                   href="#"><span class="fa fa-fw fa-info-circle">&nbsp;</span> 更多信息</a>
               </li>
 
               <li class="visible-phone">
                 <a ng-click="remove(download)"
-                   href="#"><span class="fa fa-fw fa-times">&nbsp;</span> Remove</a>
+                   href="#"><span class="fa fa-fw fa-times">&nbsp;</span> 删除</a>
               </li>
             </ul>
           </div>
@@ -881,7 +881,7 @@ http://ex1.com/f2.mp4 http://ex2.com/f2.mp4 --out=file2.mp4
     <form class="form-horizontal">
       <fieldset>
         <div class="form-group" ng-repeat="(name, set) in settings.settings">
-          <label class="col-sm-3 control-label">{{name}}</label>
+          <label class="col-sm-3 control-label">{{set.tr}}</label>
 
           <div class="col-sm-9 controls">
             <select class="form-control" ng-show="set.options.length" ng-options="opt for opt in set.options" ng-model="set.val">
@@ -890,7 +890,7 @@ http://ex1.com/f2.mp4 http://ex2.com/f2.mp4 --out=file2.mp4
             <div class="checkbox" ng-show="set.starred != undefined">
               <label>
                 <input type="checkbox" ng-model="set.starred"/>
-                Quick Access (shown on the main page)
+                添加到主界面的快速设置。
               </label>
             </div>
             <p class="help-block">{{set.desc}}</p>
@@ -911,14 +911,14 @@ http://ex1.com/f2.mp4 http://ex2.com/f2.mp4 --out=file2.mp4
 <script type="text/ng-template" id="connection.html">
   <div class="modal-header">
     <button class="close" ng-click="$dismiss()">x</button>
-    <h4>Connection Settings</h4>
+    <h4>连接设置</h4>
   </div>
   <div class="modal-body">
     <form class="form-horizontal">
       <fieldset>
-        <legend>Aria2 RPC host and port</legend>
+        <legend>Aria2 RPC 地址以及端口</legend>
         <div class="form-group">
-          <label class="col-sm-3 control-label">Enter the host:</label>
+          <label class="col-sm-3 control-label">请输入地址:</label>
           <div class="col-sm-9 controls">
             <div class="input-group">
               <span class="input-group-addon">http(s)://</span>
@@ -926,26 +926,24 @@ http://ex1.com/f2.mp4 http://ex2.com/f2.mp4 --out=file2.mp4
                 ng-model="connection.conf.host"/>
             </div>
             <p class="help-block">
-              Enter the ip or dns name of the server on which the
-              rpc for aria2 is running (default = localhost)
+             请输入运行Aria2 RPC服务器的ip地址或者域名(默认为:localhost)。
             </p>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="col-sm-3 control-label">Enter the port:</label>
+          <label class="col-sm-3 control-label">请输入端口:</label>
           <div class="col-sm-9 controls">
             <input type="text" class="form-control input-xlarge modal-form-input-number"
               ng-model="connection.conf.port"/>
             <p class="help-block">
-              Enter the port of the server on which the rpc for
-              aria2 is running (default = 6800)
+              请输入运行Aria2 RPC服务器地址端口号(默认为:6800)。
             </p>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="col-sm-3 control-label">Enter the rpc path:</label>
+          <label class="col-sm-3 control-label">请输入RPC地址:</label>
           <div class="col-sm-9 controls">
             <div class="input-group">
 			  <span class="input-group-addon">http(s)://{{connection.conf.host + ':' + connection.conf.port}}</span>
@@ -953,55 +951,53 @@ http://ex1.com/f2.mp4 http://ex2.com/f2.mp4 --out=file2.mp4
                 ng-model="connection.conf.path"/>
             </div>
             <p class="help-block">
-              Enter path for the aria2 rpc endpoint (default = /jsonrpc)
+              请输入Aria2 RPC服务器的rpc地址(默认为:/jsonrpc)。
             </p>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="col-sm-3 control-label">SSL/TLS encryption:</label>
+          <label class="col-sm-3 control-label">SSL/TLS编码:</label>
           <div class="col-sm-9 controls">
             <div class="checkbox">
               <label>
                 <input type="checkbox" ng-model="connection.conf.encrypt"/>
-                Enable SSL/TLS encryption.
+                启用 SSL/TLS 编码.
               </label>
             </div>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="col-sm-3 control-label">Enter the secret token (optional):</label>
+          <label class="col-sm-3 control-label">请输入安全令牌(可选):</label>
           <div class="col-sm-9 controls">
             <label>
               <input type="text" class="form-control input-xlarge" ng-model="connection.conf.auth.token"/>
               <p class="help-block">
-              Enter the aria2 RPC secret token (leave empty if authentication is not enabled)
+              请输入aria2 RPC安全令牌（如果未启用身份验证则留空）。
               </p>
             </label>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="col-sm-3 control-label">Enter the username (optional):</label>
+          <label class="col-sm-3 control-label">请输入用户名(可选):</label>
           <div class="col-sm-9 controls">
             <input type="text" class="form-control input-xlarge"
               ng-model="connection.conf.auth.user"/>
             <p class="help-block">
-              Enter the aria2 RPC username
-              (empty if authentication not enabled)
+              请输入aria2 RPC 用户名（如果未启用身份验证则留空）。
             </p>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="col-sm-3 control-label">Enter the password (optional):</label>
+          <label class="col-sm-3 control-label">请输入密码(可选):</label>
           <div class="col-sm-9 controls">
             <input type="password" class="form-control input-xlarge"
               ng-model="connection.conf.auth.pass"/>
             <p class="help-block">
-              Enter the aria2 RPC password
-              (empty if authentication not enabled)
+              请输入aria2 RPC 密码（如果未启用身份验证则留空）。
             </p>
           </div>
         </div>
@@ -1024,9 +1020,9 @@ http://ex1.com/f2.mp4 http://ex2.com/f2.mp4 --out=file2.mp4
     </form>
   </div>
   <div class="modal-footer">
-    <button href="#" class="btn btn-default" ng-click="$dismiss()">Cancel</button>
+    <button href="#" class="btn btn-default" ng-click="$dismiss()">取消</button>
     <button href="#" class="btn btn-default btn-primary" ng-click="$close()">
-      Save Connection configuration
+      保存连接配置
     </button>
   </div>
 </script>
@@ -1037,12 +1033,12 @@ http://ex1.com/f2.mp4 http://ex2.com/f2.mp4 --out=file2.mp4
 <script type="text/ng-template" id="server_info.html">
   <div class="modal-header">
     <button class="close" ng-click="$dismiss()">x</button>
-    <h4>Aria2 server info</h4>
+    <h4>Aria2 服务器信息</h4>
   </div>
   <div class="modal-body">
-      <b>Aria2 Version {{miscellaneous.version}}</b>
+      <b>Aria2 版本 {{miscellaneous.version}}</b>
       <br><br>
-      <b>Features Enabled</b>
+      <b>已启用插件</b>
         <ul>
         <li
           ng-repeat="feature in miscellaneous.enabledFeatures">
@@ -1051,7 +1047,7 @@ http://ex1.com/f2.mp4 http://ex2.com/f2.mp4 --out=file2.mp4
         </ul>
   </div>
   <div class="modal-footer">
-    <button class="btn btn-default" ng-click="$dismiss()">Close</button>
+    <button class="btn btn-default" ng-click="$dismiss()">关闭</button>
   </div>
 </script>
 <!-- }}} -->
@@ -1073,7 +1069,7 @@ http://ex1.com/f2.mp4 http://ex2.com/f2.mp4 --out=file2.mp4
       </p>
   </div>
   <div class="modal-footer">
-    <button class="btn btn-default" ng-click="$dismiss()">Close</button>
+    <button class="btn btn-default" ng-click="$dismiss()">关闭</button>
   </div>
 </script>
 <!-- }}} -->
